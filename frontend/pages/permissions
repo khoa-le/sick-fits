@@ -1,0 +1,11 @@
+import React from 'react';
+import PleaseSignIn from '../components/PleaseSignin'
+
+const PermissionsPage = props => (
+    <div>
+        <PleaseSignIn>
+            <p>Permissions!</p>
+        </PleaseSignIn>
+    </div>
+)
+export default PermissionsPage
