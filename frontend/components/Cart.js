@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{Component} from 'react';
+import PropTypes  from 'prop-types';
 import {Query, Mutation} from 'react-apollo';
 import gql from 'graphql-tag';
 import {adopt} from 'react-adopt'
@@ -30,38 +31,43 @@ const Composed = adopt({
     localState: <Query query={LOCAL_STATE_QUERY}/>
 });
 
-const Cart = () => {
-    return (
-        <Composed>
-            {({user, toggleCart, localState}) => {
-                const me = user.data.me;
-                if (!me) return null;
-                return (
-                    <CartStyles open={localState.data.cartOpen}>
-                        <header>
-                            <CloseButton onClick={toggleCart} title='close'>&times;</CloseButton>
-                            <Supreme>{me.name}'s Cart</Supreme>
-                            <p>You have {me.cart.length} Item{me.cart.length === 1 ? '' : 's'} in your
-                                cart.</p>
-                        </header>
-                        <ul>
-                            {me.cart.map(cartItem => <CartItem key={cartItem.id}
-                                                               cartItem={cartItem}>{cartItem.id}</CartItem>)}
-                        </ul>
-                        <footer>
-                            <p>{formatMoney(calcTotalPrice(me.cart))}</p>
-                            {me.cart.length>0 && (
-                                <TakeMyMoney>
-                                    <SickButton>Checkout</SickButton>
-                                </TakeMyMoney>
-                            )}
+class Cart extends Component{
+    static propTypes = {
+        user: PropTypes.object
+    }
+    render(){
+        return (
+            <Composed>
+                {({user, toggleCart, localState}) => {
+                    const me = user.data.me;
+                    if (!me) return null;
+                    return (
+                        <CartStyles open={localState.data.cartOpen}>
+                            <header>
+                                <CloseButton onClick={toggleCart} title='close'>&times;</CloseButton>
+                                <Supreme>{me.name}'s Cart</Supreme>
+                                <p>You have {me.cart.length} Item{me.cart.length === 1 ? '' : 's'} in your
+                                    cart.</p>
+                            </header>
+                            <ul>
+                                {me.cart.map(cartItem => <CartItem key={cartItem.id}
+                                                                   cartItem={cartItem}>{cartItem.id}</CartItem>)}
+                            </ul>
+                            <footer>
+                                <p>{formatMoney(calcTotalPrice(me.cart))}</p>
+                                {me.cart.length>0 && (
+                                    <TakeMyMoney>
+                                        <SickButton>Checkout</SickButton>
+                                    </TakeMyMoney>
+                                )}
 
-                        </footer>
-                    </CartStyles>
-                )
-            }}
-        </Composed>
-    );
+                            </footer>
+                        </CartStyles>
+                    )
+                }}
+            </Composed>
+        );
+    }
 };
 
 export default Cart;

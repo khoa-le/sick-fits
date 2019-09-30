@@ -45,7 +45,7 @@ class Signin extends Component {
                                        onChange={this.saveToState}/>
                             </label>
                             <label htmlFor="password">
-                                Email
+                                Password
                                 <input type="password" name="password" placeholder="password"
                                        value={this.state.password}
                                        onChange={this.saveToState}/>

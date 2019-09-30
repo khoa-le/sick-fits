@@ -1,7 +1,10 @@
 import App, {Container} from 'next/app';
-import Page from '../components/Page';
+import MyPage from '../components/Page';
 import {ApolloProvider} from 'react-apollo';
+import {AppProvider} from '@shopify/polaris';
+import enTranslations from '@shopify/polaris/locales/en.json';
 import withData from '../lib/withData';
+
 
 class MyApp extends App {
     static async getInitialProps({Component, ctx}) {
@@ -11,17 +14,19 @@ class MyApp extends App {
         }
         //this exposes the query to the user
         pageProps.query = ctx.query;
-        return { pageProps };
+        return {pageProps};
     }
 
     render() {
         const {Component, apollo, pageProps} = this.props;
         return (
             <Container>
-                <ApolloProvider client={ apollo }>
-                    <Page>
-                        <Component {...pageProps}/>
-                    </Page>
+                <ApolloProvider client={apollo}>
+                    <AppProvider i18n={enTranslations}>
+                        <MyPage>
+                            <Component {...pageProps}/>
+                        </MyPage>
+                    </AppProvider>
                 </ApolloProvider>
             </Container>
         );

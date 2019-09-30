@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import gql from 'graphql-tag';
+import {Page, Form, FormLayout, TextField} from '@shopify/polaris';
 import Router from 'next/router';
-import Form from './styles/Form';
 import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
 
 
 const CREATE_ITEM_MUTATION = gql`
     mutation CREATE_ITEM_MUTATION(
-    $title: String!
-    $description: String!
-    $price: Int!
-    $image: String
-    $largeImage: String
+        $title: String!
+        $description: String!
+        $price: Int!
+        $image: String
+        $largeImage: String
     ) {
         createItem(
             title: $title
@@ -35,11 +35,8 @@ class CreateItem extends Component {
         largeImage: '',
         price: 11
     };
-    handleChange = (e) => {
-        const {name, type, value} = e.target
-        const val = type === 'number' ? parseFloat(value) : value;
-
-        this.setState({[name]: val});
+    handleChange = (field) => {
+        return (value) => this.setState({[field]: value});
     };
     uploadFile = async e => {
         const files = e.target.files;
@@ -60,46 +57,63 @@ class CreateItem extends Component {
 
     render() {
         return (
+
             <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
                 {(createItem, {loading, error, called, data}) => (
-                    <Form onSubmit={async e => {
-                        e.preventDefault();
-                        const res = await createItem();
-                        Router.push({
-                            pathname: '/item',
-                            query: {id: res.data.createItem.id}
-                        })
-                    }}>
-                        <Error error={error}/>
-                        <fieldset disabled={loading} aria-busy={loading}>
-                            <label htmlFor="file">
-                                Image
-                                <input onChange={this.uploadFile}
-                                       type="file" id="file" name="file" placeholder="Upload an image" required/>
-                                {this.state.image && (<img width="200" src={this.state.image} alt="Upload Preview"/>)}
-                            </label>
-                            <label htmlFor="title">
-                                Title
-                                <input value={this.state.title}
-                                       onChange={this.handleChange}
-                                       type="text" id="title" name="title" placeholder="Title" required/>
-                            </label>
-                            <label htmlFor="price">
-                                Price
-                                <input value={this.state.price}
-                                       onChange={this.handleChange}
-                                       type="number" id="price" name="price" placeholder="Price" required/>
-                            </label>
-                            <label htmlFor="description">
-                                Description
-                                <input value={this.state.description}
-                                       onChange={this.handleChange}
-                                       type="text" id="description" name="description" placeholder="Enter a Description"
-                                       required/>
-                            </label>
-                            <button type="submit">Submit</button>
-                        </fieldset>
-                    </Form>
+                    <Page
+                        breadcrumbs={[{content: 'Products', url: '/items'}]}
+                        title={this.state.title}
+                        primaryAction={{
+                            content: 'Save',
+                            onAction: async e => {
+                                e.preventDefault();
+                                const res = await createItem();
+                                Router.push({
+                                    pathname: '/item',
+                                    query: {id: res.data.createItem.id}
+                                })
+                            }
+                        }}
+                    >
+                        <Form>
+                            <FormLayout>
+                                <Error error={error}/>
+                                <TextField
+                                    value={this.state.title}
+                                    onChange={this.handleChange('title')}
+                                    label="Title"
+                                    type="string"
+                                    name="title"
+                                    required
+                                />
+                                <TextField
+                                    value={this.state.price}
+                                    onChange={this.handleChange('price')}
+                                    label="Price"
+                                    name="price"
+                                    type="number"
+                                    required
+                                />
+                                <TextField
+                                    value={this.state.description}
+                                    onChange={this.handleChange('description')}
+                                    label="Description"
+                                    name="description"
+                                    type="string"
+                                    max="1000"
+                                    required
+                                />
+                                <label htmlFor="file">
+                                    Image<br/>
+                                    <input onChange={this.uploadFile}
+                                           type="file" id="file" name="file" placeholder="Upload an image"
+                                           required/>
+                                    {this.state.image && (
+                                        <img width="200" src={this.state.image} alt="Upload Preview"/>)}
+                                </label>
+                            </FormLayout>
+                        </Form>
+                    </Page>
                 )}
             </Mutation>
 

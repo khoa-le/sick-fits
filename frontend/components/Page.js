@@ -1,5 +1,20 @@
 import React from 'react'
 import styled, {ThemeProvider, injectGlobal} from 'styled-components';
+import {
+    Layout,
+    Page,
+    FooterHelp,
+    Card,
+    Link,
+    Button,
+    FormLayout,
+    TextField,
+    AccountConnection,
+    ChoiceList,
+    SettingToggle,
+} from '@shopify/polaris';
+import '@shopify/polaris/styles.css';
+import {ImportMinor} from '@shopify/polaris-icons';
 import Header from './Header'
 import Meta from './Meta'
 
@@ -27,8 +42,6 @@ const Inner = styled.div`
 
 injectGlobal`
   @font-face {
-    font-family: 'radnika_next';
-    src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');
     font-weight:normal;
     font-style:normal;
   }
@@ -44,7 +57,6 @@ injectGlobal`
     margin:0;
     font-size: 1.5rem;
     line-height: 2;
-    font-family: 'radnika_next';
   }
   a{
     text-decoration: none;
@@ -52,18 +64,20 @@ injectGlobal`
   }
 `
 
-class Page extends React.Component {
+class MyPage extends React.Component {
     render() {
         return (
             <ThemeProvider theme={theme}>
                 <StyledPage>
                     <Meta/>
                     <Header/>
-                    <Inner>{this.props.children}</Inner>
+                    <Inner>
+                        {this.props.children}
+                    </Inner>
                 </StyledPage>
             </ThemeProvider>
         )
     }
 }
 
-export default Page;
+export default MyPage;

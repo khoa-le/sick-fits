@@ -46,13 +46,13 @@ class Signup extends Component {
                                        onChange={this.saveToState}/>
                             </label>
                             <label htmlFor="password">
-                                Email
+                                Password
                                 <input type="password" name="password" placeholder="password"
                                        value={this.state.password}
                                        onChange={this.saveToState}/>
                             </label>
                             <label htmlFor="name">
-                                Email
+                                Name
                                 <input type="text" name="name" placeholder="name" value={this.state.name}
                                        onChange={this.saveToState}/>
                             </label>
