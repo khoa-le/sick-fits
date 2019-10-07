@@ -200,7 +200,7 @@ const mutations = {
             console.log("This item is already in their cart");
             return ctx.db.mutation.updateCartItem({
                 where: {id: existingCartItem.id},
-                data: {quantity: existingCartItem.quantity + 1},
+                data: {quantity: existingCartItem.quantity + args.quantity},
             }, info);
         }
         return ctx.db.mutation.createCartItem({
@@ -210,7 +210,8 @@ const mutations = {
                 },
                 item: {
                     connect: {id: args.id}
-                }
+                },
+                quantity: args.quantity,
             }
         }, info);
 

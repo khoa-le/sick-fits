@@ -48,7 +48,7 @@ AWS.FileSystemCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see get
    */
   refresh: function refresh(callback) {
-    if (!callback) callback = AWS.util.fn.callback;
+    if (!callback) callback = function(err) { if (err) throw err; };
     try {
       var creds = JSON.parse(AWS.util.readFileSync(this.filename));
       AWS.Credentials.call(this, creds);

@@ -4,7 +4,7 @@ type SuccessMessage{
 }
 
 type Mutation{
-    createItem(title: String, description: String, price: Int, image: String, largeImage: String): Item!
+    createItem(title: String, description: String, price: Int, image: String, largeImage: String, image_2: String): Item!
     updateItem(id: ID!,title:String, description: String,price: Int): Item!
     deleteItem(id: ID!): Item
     signup(email: String!, password: String!, name: String!): User!
@@ -13,7 +13,7 @@ type Mutation{
     requestReset(email:String!): SuccessMessage
     resetPassword(resetToken: String!, password: String!, confirmPassword: String!): User!
     updatePermissions(permissions: [Permission],userId: ID!): User
-    addToCart(id: ID!): CartItem
+    addToCart(id: ID!,quantity: Int!): CartItem
     removeFromCart(id: ID!): CartItem
     createOrder(token: String!):Order!
 }
