@@ -1,8 +1,19 @@
 version: '3'
 services:
+  postgres:
+    build: './postgres'
+#    restart: 'always'
+    ports:
+      - '5432:5432'
+    environment:
+      - "PG_DB_USER=khoa"
+      - "PG_DB_PASSWORD=khoa"
+      - "PG_DB_DATABASE=sickfits_dev"
+      - "POSTGRES_PASSWORD=password"
   prisma:
     image: prismagraphql/prisma:1.34
-    restart: always
+    links:
+      - postgres
     ports:
     - "4466:4466"
     environment:
@@ -13,12 +24,11 @@ services:
         databases:
           default:
             connector: postgres
-            host: host.docker.internal
+            host: postgres
             database: sickfits_dev
             schema: public
-            user: khoa
-            password: ''
-            ssl: false
+            user: postgres
+            password: password
             rawAccess: true
             port: '5432'
             migrations: true

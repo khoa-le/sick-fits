@@ -1,5 +1,5 @@
 import React from 'react';
-import Items from '../components/Items';
+import Items from '../components/ProductListing/Items';
 
 const Home = props => (
     <div>

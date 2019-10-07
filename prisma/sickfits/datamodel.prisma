@@ -23,6 +23,7 @@ type Item {
     description: String!
     image :String
     largeImage: String
+    image_2 :String
     price: Int!
     discounted_price: Int
     display: Boolean! @default(value: false)

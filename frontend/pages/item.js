@@ -1,8 +1,8 @@
-import SingleItem from '../components/SingleItem';
+import ProductPage from '../components/ProductDetail/ProductPage';
 
 const Item = props => (
     <div>
-        <SingleItem id={props.query.id}/>
+        <ProductPage id={props.query.id}/>
     </div>
 )
 export default Item

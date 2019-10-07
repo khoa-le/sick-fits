@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import gql from 'graphql-tag';
-import {ALL_ITEMS_QUERY} from './Items';
+import {ALL_ITEMS_QUERY} from './ProductListing/Items';
 
 
 const DELETE_ITEM_MUTATION = gql`

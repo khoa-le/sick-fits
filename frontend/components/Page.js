@@ -1,20 +1,6 @@
 import React from 'react'
-import styled, {ThemeProvider, injectGlobal} from 'styled-components';
-import {
-    Layout,
-    Page,
-    FooterHelp,
-    Card,
-    Link,
-    Button,
-    FormLayout,
-    TextField,
-    AccountConnection,
-    ChoiceList,
-    SettingToggle,
-} from '@shopify/polaris';
+import styled, {ThemeProvider, createGlobalStyle} from 'styled-components';
 import '@shopify/polaris/styles.css';
-import {ImportMinor} from '@shopify/polaris-icons';
 import Header from './Header'
 import Meta from './Meta'
 
@@ -24,6 +10,7 @@ const theme = {
     black: '#393939',
     grey: '#3A3A3A',
     lightGrey: '#E1E1E1',
+    green: '#13C83A',
     offWhite: '#EDEDED',
     maxWidth: '1000px',
     bs: '0 12px 24px 0 rgba(0,0,0,0.09)'
@@ -40,7 +27,7 @@ const Inner = styled.div`
     padding: 2rem;
 `;
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   @font-face {
     font-weight:normal;
     font-style:normal;
@@ -62,12 +49,20 @@ injectGlobal`
     text-decoration: none;
     color: ${theme.black};
   }
-`
+  p{
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+`;
 
 class MyPage extends React.Component {
     render() {
         return (
             <ThemeProvider theme={theme}>
+                <GlobalStyle />
                 <StyledPage>
                     <Meta/>
                     <Header/>

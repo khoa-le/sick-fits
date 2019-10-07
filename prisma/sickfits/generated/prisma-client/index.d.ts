@@ -329,6 +329,8 @@ export type ItemOrderByInput =
   | "image_DESC"
   | "largeImage_ASC"
   | "largeImage_DESC"
+  | "image_2_ASC"
+  | "image_2_DESC"
   | "price_ASC"
   | "price_DESC"
   | "discounted_price_ASC"
@@ -688,6 +690,7 @@ export interface ItemUpdateDataInput {
   description?: Maybe<String>;
   image?: Maybe<String>;
   largeImage?: Maybe<String>;
+  image_2?: Maybe<String>;
   price?: Maybe<Int>;
   discounted_price?: Maybe<Int>;
   display?: Maybe<Boolean>;
@@ -939,6 +942,7 @@ export interface ItemUpdateInput {
   description?: Maybe<String>;
   image?: Maybe<String>;
   largeImage?: Maybe<String>;
+  image_2?: Maybe<String>;
   price?: Maybe<Int>;
   discounted_price?: Maybe<Int>;
   display?: Maybe<Boolean>;
@@ -956,6 +960,7 @@ export interface ItemUpdateManyDataInput {
   description?: Maybe<String>;
   image?: Maybe<String>;
   largeImage?: Maybe<String>;
+  image_2?: Maybe<String>;
   price?: Maybe<Int>;
   discounted_price?: Maybe<Int>;
   display?: Maybe<Boolean>;
@@ -1032,6 +1037,20 @@ export interface ItemWhereInput {
   largeImage_not_starts_with?: Maybe<String>;
   largeImage_ends_with?: Maybe<String>;
   largeImage_not_ends_with?: Maybe<String>;
+  image_2?: Maybe<String>;
+  image_2_not?: Maybe<String>;
+  image_2_in?: Maybe<String[] | String>;
+  image_2_not_in?: Maybe<String[] | String>;
+  image_2_lt?: Maybe<String>;
+  image_2_lte?: Maybe<String>;
+  image_2_gt?: Maybe<String>;
+  image_2_gte?: Maybe<String>;
+  image_2_contains?: Maybe<String>;
+  image_2_not_contains?: Maybe<String>;
+  image_2_starts_with?: Maybe<String>;
+  image_2_not_starts_with?: Maybe<String>;
+  image_2_ends_with?: Maybe<String>;
+  image_2_not_ends_with?: Maybe<String>;
   price?: Maybe<Int>;
   price_not?: Maybe<Int>;
   price_in?: Maybe<Int[] | Int>;
@@ -1123,6 +1142,7 @@ export interface ItemCreateInput {
   description: String;
   image?: Maybe<String>;
   largeImage?: Maybe<String>;
+  image_2?: Maybe<String>;
   price: Int;
   discounted_price?: Maybe<Int>;
   display?: Maybe<Boolean>;
@@ -1201,6 +1221,20 @@ export interface ItemScalarWhereInput {
   largeImage_not_starts_with?: Maybe<String>;
   largeImage_ends_with?: Maybe<String>;
   largeImage_not_ends_with?: Maybe<String>;
+  image_2?: Maybe<String>;
+  image_2_not?: Maybe<String>;
+  image_2_in?: Maybe<String[] | String>;
+  image_2_not_in?: Maybe<String[] | String>;
+  image_2_lt?: Maybe<String>;
+  image_2_lte?: Maybe<String>;
+  image_2_gt?: Maybe<String>;
+  image_2_gte?: Maybe<String>;
+  image_2_contains?: Maybe<String>;
+  image_2_not_contains?: Maybe<String>;
+  image_2_starts_with?: Maybe<String>;
+  image_2_not_starts_with?: Maybe<String>;
+  image_2_ends_with?: Maybe<String>;
+  image_2_not_ends_with?: Maybe<String>;
   price?: Maybe<Int>;
   price_not?: Maybe<Int>;
   price_in?: Maybe<Int[] | Int>;
@@ -1371,6 +1405,7 @@ export interface ItemUpdateManyMutationInput {
   description?: Maybe<String>;
   image?: Maybe<String>;
   largeImage?: Maybe<String>;
+  image_2?: Maybe<String>;
   price?: Maybe<Int>;
   discounted_price?: Maybe<Int>;
   display?: Maybe<Boolean>;
@@ -1492,6 +1527,7 @@ export interface ItemUpdateWithoutCategoriesDataInput {
   description?: Maybe<String>;
   image?: Maybe<String>;
   largeImage?: Maybe<String>;
+  image_2?: Maybe<String>;
   price?: Maybe<Int>;
   discounted_price?: Maybe<Int>;
   display?: Maybe<Boolean>;
@@ -1552,6 +1588,7 @@ export interface ItemCreateWithoutCategoriesInput {
   description: String;
   image?: Maybe<String>;
   largeImage?: Maybe<String>;
+  image_2?: Maybe<String>;
   price: Int;
   discounted_price?: Maybe<Int>;
   display?: Maybe<Boolean>;
@@ -2393,6 +2430,7 @@ export interface Item {
   description: String;
   image?: String;
   largeImage?: String;
+  image_2?: String;
   price: Int;
   discounted_price?: Int;
   display: Boolean;
@@ -2404,6 +2442,7 @@ export interface ItemPromise extends Promise<Item>, Fragmentable {
   description: () => Promise<String>;
   image: () => Promise<String>;
   largeImage: () => Promise<String>;
+  image_2: () => Promise<String>;
   price: () => Promise<Int>;
   discounted_price: () => Promise<Int>;
   display: () => Promise<Boolean>;
@@ -2427,6 +2466,7 @@ export interface ItemSubscription
   description: () => Promise<AsyncIterator<String>>;
   image: () => Promise<AsyncIterator<String>>;
   largeImage: () => Promise<AsyncIterator<String>>;
+  image_2: () => Promise<AsyncIterator<String>>;
   price: () => Promise<AsyncIterator<Int>>;
   discounted_price: () => Promise<AsyncIterator<Int>>;
   display: () => Promise<AsyncIterator<Boolean>>;
@@ -2450,6 +2490,7 @@ export interface ItemNullablePromise
   description: () => Promise<String>;
   image: () => Promise<String>;
   largeImage: () => Promise<String>;
+  image_2: () => Promise<String>;
   price: () => Promise<Int>;
   discounted_price: () => Promise<Int>;
   display: () => Promise<Boolean>;
@@ -2583,6 +2624,7 @@ export interface ItemPreviousValues {
   description: String;
   image?: String;
   largeImage?: String;
+  image_2?: String;
   price: Int;
   discounted_price?: Int;
   display: Boolean;
@@ -2596,6 +2638,7 @@ export interface ItemPreviousValuesPromise
   description: () => Promise<String>;
   image: () => Promise<String>;
   largeImage: () => Promise<String>;
+  image_2: () => Promise<String>;
   price: () => Promise<Int>;
   discounted_price: () => Promise<Int>;
   display: () => Promise<Boolean>;
@@ -2609,6 +2652,7 @@ export interface ItemPreviousValuesSubscription
   description: () => Promise<AsyncIterator<String>>;
   image: () => Promise<AsyncIterator<String>>;
   largeImage: () => Promise<AsyncIterator<String>>;
+  image_2: () => Promise<AsyncIterator<String>>;
   price: () => Promise<AsyncIterator<Int>>;
   discounted_price: () => Promise<AsyncIterator<Int>>;
   display: () => Promise<AsyncIterator<Boolean>>;

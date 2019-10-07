@@ -3,7 +3,6 @@ import {Mutation} from 'react-apollo';
 import gql from 'graphql-tag';
 import {Page, Form, FormLayout, TextField} from '@shopify/polaris';
 import Router from 'next/router';
-import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
 
 
@@ -14,6 +13,7 @@ const CREATE_ITEM_MUTATION = gql`
         $price: Int!
         $image: String
         $largeImage: String
+        $image_2: String
     ) {
         createItem(
             title: $title
@@ -21,6 +21,7 @@ const CREATE_ITEM_MUTATION = gql`
             price: $price
             image: $image
             largeImage:$largeImage
+            image_2: $image_2
         ){
             id
         }
@@ -29,16 +30,18 @@ const CREATE_ITEM_MUTATION = gql`
 
 class CreateItem extends Component {
     state = {
-        title: 'Nike',
-        description: 'Nike description',
+        title: '',
+        description: '',
         image: '',
         largeImage: '',
-        price: 11
+        image_2: '',
+        price: 0
     };
     handleChange = (field) => {
         return (value) => this.setState({[field]: value});
     };
     uploadFile = async e => {
+        const name = e.target.name;
         const files = e.target.files;
         const data = new FormData();
         data.append('file', files[0]);
@@ -48,10 +51,18 @@ class CreateItem extends Component {
             body: data
         });
         const file = await res.json();
-        this.setState({
-            image: file.secure_url,
-            largeImage: file.eager[0].secure_url,
-        })
+
+        if(name=='image'){
+            this.setState({
+                image: file.secure_url,
+                largeImage: file.eager[0].secure_url,
+            })
+        }else{
+            this.setState({
+                image_2: file.secure_url,
+            })
+        }
+
 
     };
 
@@ -103,13 +114,21 @@ class CreateItem extends Component {
                                     max="1000"
                                     required
                                 />
-                                <label htmlFor="file">
+                                <label htmlFor="image">
                                     Image<br/>
                                     <input onChange={this.uploadFile}
-                                           type="file" id="file" name="file" placeholder="Upload an image"
-                                           required/>
+                                           type="file" id="image" name="image" placeholder="Upload main image"
+                                            required/>
                                     {this.state.image && (
                                         <img width="200" src={this.state.image} alt="Upload Preview"/>)}
+                                </label>
+                                <label htmlFor="image_2">
+                                    Image<br/>
+                                    <input onChange={this.uploadFile}
+                                           type="file" id="image_2" name="image_2" placeholder="Upload more image"
+                                           required/>
+                                    {this.state.image_2 && (
+                                        <img width="200" src={this.state.image_2} alt="Upload Preview"/>)}
                                 </label>
                             </FormLayout>
                         </Form>

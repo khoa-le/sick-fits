@@ -435,6 +435,7 @@ type Item {
   description: String!
   image: String
   largeImage: String
+  image_2: String
   price: Int!
   discounted_price: Int
   display: Boolean!
@@ -454,6 +455,7 @@ input ItemCreateInput {
   description: String!
   image: String
   largeImage: String
+  image_2: String
   price: Int!
   discounted_price: Int
   display: Boolean
@@ -477,6 +479,7 @@ input ItemCreateWithoutCategoriesInput {
   description: String!
   image: String
   largeImage: String
+  image_2: String
   price: Int!
   discounted_price: Int
   display: Boolean
@@ -499,6 +502,8 @@ enum ItemOrderByInput {
   image_DESC
   largeImage_ASC
   largeImage_DESC
+  image_2_ASC
+  image_2_DESC
   price_ASC
   price_DESC
   discounted_price_ASC
@@ -513,6 +518,7 @@ type ItemPreviousValues {
   description: String!
   image: String
   largeImage: String
+  image_2: String
   price: Int!
   discounted_price: Int
   display: Boolean!
@@ -589,6 +595,20 @@ input ItemScalarWhereInput {
   largeImage_not_starts_with: String
   largeImage_ends_with: String
   largeImage_not_ends_with: String
+  image_2: String
+  image_2_not: String
+  image_2_in: [String!]
+  image_2_not_in: [String!]
+  image_2_lt: String
+  image_2_lte: String
+  image_2_gt: String
+  image_2_gte: String
+  image_2_contains: String
+  image_2_not_contains: String
+  image_2_starts_with: String
+  image_2_not_starts_with: String
+  image_2_ends_with: String
+  image_2_not_ends_with: String
   price: Int
   price_not: Int
   price_in: [Int!]
@@ -635,6 +655,7 @@ input ItemUpdateDataInput {
   description: String
   image: String
   largeImage: String
+  image_2: String
   price: Int
   discounted_price: Int
   display: Boolean
@@ -647,6 +668,7 @@ input ItemUpdateInput {
   description: String
   image: String
   largeImage: String
+  image_2: String
   price: Int
   discounted_price: Int
   display: Boolean
@@ -659,6 +681,7 @@ input ItemUpdateManyDataInput {
   description: String
   image: String
   largeImage: String
+  image_2: String
   price: Int
   discounted_price: Int
   display: Boolean
@@ -669,6 +692,7 @@ input ItemUpdateManyMutationInput {
   description: String
   image: String
   largeImage: String
+  image_2: String
   price: Int
   discounted_price: Int
   display: Boolean
@@ -705,6 +729,7 @@ input ItemUpdateWithoutCategoriesDataInput {
   description: String
   image: String
   largeImage: String
+  image_2: String
   price: Int
   discounted_price: Int
   display: Boolean
@@ -798,6 +823,20 @@ input ItemWhereInput {
   largeImage_not_starts_with: String
   largeImage_ends_with: String
   largeImage_not_ends_with: String
+  image_2: String
+  image_2_not: String
+  image_2_in: [String!]
+  image_2_not_in: [String!]
+  image_2_lt: String
+  image_2_lte: String
+  image_2_gt: String
+  image_2_gte: String
+  image_2_contains: String
+  image_2_not_contains: String
+  image_2_starts_with: String
+  image_2_not_starts_with: String
+  image_2_ends_with: String
+  image_2_not_ends_with: String
   price: Int
   price_not: Int
   price_in: [Int!]
