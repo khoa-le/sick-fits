@@ -1,8 +1,8 @@
 import React from 'react'
 import styled, {ThemeProvider, createGlobalStyle} from 'styled-components';
-import '@shopify/polaris/styles.css';
-import Header from './Header'
-import Meta from './Meta'
+import Header from './Header';
+import Meta from './Meta';
+import Footer from './Footer';
 
 
 const theme = {
@@ -19,6 +19,7 @@ const theme = {
 const StyledPage = styled.div`
     background: white;
     color: ${props => props.theme.black};
+    //margin-bottom: 100px;
 `;
 
 const Inner = styled.div`
@@ -69,6 +70,7 @@ class MyPage extends React.Component {
                     <Inner>
                         {this.props.children}
                     </Inner>
+                    <Footer/>
                 </StyledPage>
             </ThemeProvider>
         )

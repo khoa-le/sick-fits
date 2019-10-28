@@ -7,9 +7,7 @@ import {breakpoints, colors, radius, spacing} from '../styles/global';
 const THUMBNAIL_SIZE = '44px';
 
 const ProductThumbnailsRoot = styled.div`
-  height: ${THUMBNAIL_SIZE};
   -webkit-overflow-scrolling: touch;
-  overflow-x: scroll;
   width: 100%;
 
   @media (min-width: ${breakpoints.desktop}px) {
@@ -46,7 +44,6 @@ export const Thumbnail = styled.a`
 class ProductThumbnails extends Component {
     handleClick = (image, callback) => event => {
         event.preventDefault();
-        console.log("Handle click",image);
         callback(image);
     };
 

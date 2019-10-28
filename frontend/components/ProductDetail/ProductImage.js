@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {keyframes} from 'styled-components';
 import {MdZoomIn} from 'react-icons/md';
 
-import {breakpoints, colors, radius, spacing} from '../styles/global';
+import {breakpoints, colors, radius, spacing,mobile} from '../styles/global';
 
 export const IMAGE_CHANGE_ANIM_DURATION = 250;
 
@@ -53,6 +53,10 @@ const ZoomHelper = styled.span`
 export const StyledImage = styled.img`
   border-radius: ${radius.large}px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+  ${mobile(`
+    width: 100%;
+  `)}
+  
 `;
 
 class ProductImage extends Component {
@@ -95,7 +99,7 @@ class ProductImage extends Component {
 }
 
 ProductImage.propTypes = {
-    image: PropTypes.object.isRequired,
+    image: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     imageFeatured: PropTypes.object
 };

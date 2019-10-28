@@ -1,5 +1,4 @@
-
-
+import {css} from 'styled-components';
 
 //color pattern from https://designsystem.reactioncommerce.com/#/Style/Colors
 export const colors = {
@@ -75,3 +74,15 @@ export const fonts = {
     heading: `Futura PT, ${defaultFontStack}`,
     monospace: monospaceFontStack
 };
+
+export const mobile = inner => css`
+  @media (max-width: ${1000 / 16}em) {
+    ${inner};
+  }
+`;
+
+export const phone = inner => css`
+  @media (max-width: ${650 / 16}em) {
+    ${inner};
+  }
+`;

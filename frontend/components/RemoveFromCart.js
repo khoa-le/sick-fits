@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import {CURRENT_USER_QUERY} from "./User";
+import {colors} from "./styles/global";
 
 const REMOVE_FROM_CART_MUTATION = gql`
     mutation  removeFromCart($id: ID!){
@@ -18,7 +19,7 @@ const BigButton = styled.button`
     background:none;
     border:0;
     &:hover{
-    color: ${props => props.theme.red};
+    color: ${colors.brandDark};
     cursor:pointer;
     }
 `;

@@ -5,11 +5,11 @@ const CartStyles = styled.div`
   position: relative;
   background: white;
   position: fixed;
-  height: 100%;
+  height: 100vh;
   top: 0;
   right: 0;
   width: 40%;
-  min-width: 500px;
+  min-width: 320px;
   bottom: 0;
   transform: translateX(100%);
   transition: all 0.3s;

@@ -30,8 +30,6 @@ function totalItems(cart) {
 class TakeMyMoney extends Component {
     onToken = async (res, createOrder) => {
         NProgress.start();
-        console.log('On token called');
-        console.log(res);
         const order = await createOrder({
             variables: {
                 token: res.id,

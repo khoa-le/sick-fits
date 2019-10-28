@@ -8,7 +8,7 @@ import Error from '../ErrorMessage';
 import ProductSpecs from "./ProductSpecs";
 import ProductForm from './ProductForm';
 import ProductImageDesktop from './ProductImagesDesktop';
-import {breakpoints} from '../styles/global';
+import {breakpoints, spacing} from '../styles/global';
 
 const ProductPageStyles = styled.div`
    
@@ -19,6 +19,9 @@ const Container = styled.div`
     align-items: flex-start;
     display: flex;
   }
+`;
+const ProductDetail = styled.div`
+  margin-left: ${spacing['2xs']}px;
 `;
 
 const SINGLE_ITEM_QUERY = gql`
@@ -63,11 +66,11 @@ class ProductPage extends Component {
                                 //imageFeatured={this.productImageFeatured}
                             >
                             </ProductImageDesktop>
-                            <div className="details">
+                            <ProductDetail>
                                 <BackLink>Quay Lại</BackLink>
                                 <ProductSpecs item={item}/>
                                 <ProductForm item={item}/>
-                            </div>
+                            </ProductDetail>
                         </Container>
                     </ProductPageStyles>
 

@@ -5,9 +5,8 @@ import gql from 'graphql-tag';
 import {adopt} from 'react-adopt'
 import User from './User';
 import CartStyles from './styles/CartStyles';
-import Supreme from './styles/Supreme';
 import CloseButton from './styles/CloseButton';
-import SickButton from './styles/SickButton';
+import {PrimaryButton} from './shared/Buttons';
 import CartItem from './CartItem';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import formatMoney from "../lib/formatMoney";
@@ -27,7 +26,7 @@ const TOGGLE_CART_MUTATION = gql`
 
 const Composed = adopt({
     user: <User/>,
-    toggleCart: <Mutation mutation={TOGGLE_CART_MUTATION}/>,
+    toggleCart: <Mutation mutation={TOGGLE_CART_MUTATION}></Mutation>,
     localState: <Query query={LOCAL_STATE_QUERY}/>
 });
 
@@ -45,9 +44,7 @@ class Cart extends Component{
                         <CartStyles open={localState.data.cartOpen}>
                             <header>
                                 <CloseButton onClick={toggleCart} title='close'>&times;</CloseButton>
-                                <Supreme>{me.name}'s Cart</Supreme>
-                                <p>You have {me.cart.length} Item{me.cart.length === 1 ? '' : 's'} in your
-                                    cart.</p>
+                                <p>Bạn có {me.cart.length} món hàng trong giỏ.</p>
                             </header>
                             <ul>
                                 {me.cart.map(cartItem => <CartItem key={cartItem.id}
@@ -57,10 +54,9 @@ class Cart extends Component{
                                 <p>{formatMoney(calcTotalPrice(me.cart))}</p>
                                 {me.cart.length>0 && (
                                     <TakeMyMoney>
-                                        <SickButton>Checkout</SickButton>
+                                        <PrimaryButton>Thanh Toán</PrimaryButton>
                                     </TakeMyMoney>
                                 )}
-
                             </footer>
                         </CartStyles>
                     )
