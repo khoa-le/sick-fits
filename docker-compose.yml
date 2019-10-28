@@ -1,0 +1,88 @@
+version: '3'
+services:
+#  postgres:
+#    image: 'postgres:latest'
+#  redis:
+#    image: 'redis:latest'
+#  nginx:
+#    restart: always
+#    build:
+#      dockerfile: Dockerfile.dev
+#      context: ./nginx
+#    ports:
+#      - "3050:80"
+#  api:
+#    build:
+#      context: ./server
+#      dockerfile: Dockerfile.dev
+#    volumes:
+#      - /app/node_modules
+#      - ./server:/app
+#    environment:
+#      - REDIS_HOST=redis
+#      - REDIS_PORT=6379
+#      - PGUSER=postgres
+#      - PGHOST=postgres
+#      - PGDATABASE=postgres
+#      - PGPASSWORD=postgres_password
+#      - PGPORT=5432
+  postgres:
+    build: './prisma/sickfits/postgres'
+    ports:
+      - '5432:5432'
+    environment:
+      - "PG_DB_USER=khoa"
+      - "PG_DB_PASSWORD=khoa"
+      - "PG_DB_DATABASE=sickfits_dev"
+      - "POSTGRES_PASSWORD=password"
+  prisma:
+    image: prismagraphql/prisma:1.34
+    links:
+      - postgres
+    ports:
+      - "4466:4466"
+    environment:
+      PRISMA_CONFIG: |
+        port: 4466
+        # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
+        # managementApiSecret: my-secret
+        databases:
+          default:
+            connector: postgres
+            host: postgres
+            database: sickfits_dev
+            schema: public
+            user: postgres
+            password: password
+            rawAccess: true
+            port: '5432'
+            migrations: true
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - '4444:4444'
+    links:
+      - prisma
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - '7777:7777'
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+
+#  worker:
+#    build:
+#      context: ./worker
+#      dockerfile: Dockerfile.dev
+#    volumes:
+#      - /app/node_modules
+#      - ./worker:/app
